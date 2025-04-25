@@ -36,3 +36,18 @@ type Transfer @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+# Account entity representing an owner of one or more BAYC NFTs
+type Account @entity(immutable: false) {
+  id: ID!
+  tokens: [Token!]! @derivedFrom(field: "owner")
+  tokenCount: Int!
+}
+
+# Token entity representing a BAYC NFT
+type Token @entity(immutable: false) {
+  id: ID!             # tokenID as string
+  owner: Account!     # current owner
+  lastTransferBlock: Int!
+  lastTransferTimestamp: Int!
+}

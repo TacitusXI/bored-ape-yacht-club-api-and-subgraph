@@ -8,12 +8,14 @@ This subgraph indexes Bored Ape Yacht Club (BAYC) NFT data from Ethereum, tracki
 - Tracks current and historical ownership
 - Records approval events
 - Supports querying by wallet address, token ID, or timestamp
+- Maintains Account entities for each owner
+- Stores Token entities with current ownership information
 
 ## Deployment
 
 The subgraph is deployed on The Graph's hosted service and can be accessed at:
 
-- **Queries (HTTP)**: [https://api.studio.thegraph.com/query/110068/bayc/v0.0.1](https://api.studio.thegraph.com/query/110068/bayc/v0.0.1)
+- **Queries (HTTP)**: [https://api.studio.thegraph.com/query/110068/bayc/v0.0.2](https://api.studio.thegraph.com/query/110068/bayc/v0.0.2)
 
 ## Example Queries
 
@@ -26,6 +28,7 @@ The subgraph is deployed on The Graph's hosted service and can be accessed at:
     tokens {
       id
     }
+    tokenCount
   }
 }
 ```
@@ -43,6 +46,19 @@ The subgraph is deployed on The Graph's hosted service and can be accessed at:
       id
     }
     timestamp
+  }
+}
+```
+
+### Query tokens at a specific block height
+
+```graphql
+{
+  tokens(first: 5, block: {number: 14688630}) {
+    id
+    owner {
+      id
+    }
   }
 }
 ```
@@ -98,9 +114,18 @@ npm run deploy
 
 The main entities in the schema are:
 
-- `Account`: Represents an Ethereum address
-- `Token`: Represents a BAYC NFT
+- `Account`: Represents an Ethereum address that owns BAYC NFTs
+- `Token`: Represents a BAYC NFT with its current owner
 - `Transfer`: Records token transfers between accounts
+- `Approval`: Tracks approval events for tokens
+- `ApprovalForAll`: Records operator approval events
+
+## Latest Changes
+
+- Added `Account` and `Token` entities to track NFT ownership
+- Updated mapping code to maintain ownership records
+- Added support for historical queries at specific block heights
+- Enhanced example queries in documentation
 
 ## License
 
