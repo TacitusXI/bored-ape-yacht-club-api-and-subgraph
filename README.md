@@ -15,7 +15,7 @@ This subgraph indexes Bored Ape Yacht Club (BAYC) NFT data from Ethereum, tracki
 
 The subgraph is deployed on The Graph's hosted service and can be accessed at:
 
-- **Queries (HTTP)**: [https://api.studio.thegraph.com/query/110068/bayc/v0.0.2](https://api.studio.thegraph.com/query/110068/bayc/v0.0.2)
+- **Queries (HTTP)**: [https://api.studio.thegraph.com/query/110068/bayc/v0.0.3](https://api.studio.thegraph.com/query/110068/bayc/v0.0.3)
 
 ## Example Queries
 
